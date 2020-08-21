@@ -1,0 +1,267 @@
+<br>
+<div class="container">
+    <form (ngSubmit)="onSubmit(UserService.currentFitness)" [formGroup]="fitnessForm" novalidate focusInvalidInput>
+        <div>
+            <h2>Place Fitness Trainer Appointment</h2>
+        </div><hr>
+        
+        <legend>Personal Information  </legend>
+        <div class="row">
+            <div class="form-group col-md-6 col-sm-6">
+                <label for="firstname">First Name:</label>
+                <input type="text" placeholder="First Name" id="firstname" formControlName="firstname" autofocus class="form-control"                 
+                 (change)="log(firstname)" [(ngModel)]="UserService.currentFitness.firstname" pattern="[a-zA-Z]*"
+                  required="required">                 
+                <small class="form-text text-muted text-danger"
+                  *ngIf="fitnessForm.controls.firstname.touched && fitnessForm.controls.firstname.errors?.required">
+                  Please enter first name.!
+                </small>
+                <small class="form-text text-muted text-danger"
+                  *ngIf="fitnessForm.controls.firstname.touched && fitnessForm.controls.firstname.errors?.pattern">
+                  First name has invalid pattern.!
+                </small>
+                
+            </div>
+            <div class="form-group col-md-6 col-sm-6">
+                <label for="lastname">Last Name:</label>
+                <input type="text" placeholder="Last Name" id="lastname" formControlName="lastname" class="form-control" 
+                (change)="log(lastname)"  [(ngModel)]="UserService.currentFitness.lastname" pattern="[a-zA-Z]*"
+                required ="required"               >
+                <small class="form-text text-muted text-danger"
+                  *ngIf="fitnessForm.controls.lastname.touched && fitnessForm.controls.lastname.errors?.required">
+                  Please enter last name.!
+              </small>
+              <small class="form-text text-muted text-danger"
+                  *ngIf="fitnessForm.controls.lastname.touched && fitnessForm.controls.lastname.errors?.pattern">
+                  Last name has invalid pattern.!
+                </small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8 col-sm-8">
+                <label for="email">Email:</label>
+                <input type="email" placeholder="Enter Email ID" id="email" formControlName="email" class="form-control"                 
+                required="required"  [(ngModel)]="UserService.currentFitness.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                >
+                <small class="form-text text-muted text-danger"
+                    *ngIf="fitnessForm.controls.email.touched && fitnessForm.controls.email.errors?.required">
+                    Please enter email.!
+                </small>
+                <small class="form-text text-muted text-danger"
+                    *ngIf="fitnessForm.controls.email.touched && fitnessForm.controls.email.errors?.email">
+                    Enter the valid email .!
+                </small>
+                <small class="form-text text-muted text-danger" 
+                    *ngIf="fitnessForm.controls.email.touched && fitnessForm.controls.email.errors?.pattern">
+                    Invalid email .!
+                </small>
+            </div>
+            <div class="form-group col-md-4 col-sm-4">
+                <label for="age">Age:</label>
+                <input type="number" placeholder="Age" min="18" max="60" id="age" formControlName="age" class="form-control"
+                [(ngModel)]="UserService.currentFitness.age"
+                 required="required"
+                 >
+                 <small class="form-text text-muted text-danger" 
+                    *ngIf="fitnessForm.controls.age.touched && fitnessForm.controls.age.errors?.required">
+                    Please enter Age.!
+                </small>
+                <small class="form-text text-muted text-danger" 
+                    *ngIf="fitnessForm.controls.age.touched && fitnessForm.controls.age.errors?.min">
+                    Age cannot be less than 18.!
+                </small>
+                <small class="form-text text-muted text-danger" 
+                    *ngIf="fitnessForm.controls.age.touched && fitnessForm.controls.age.errors?.max">
+                    Age cannot be greater than 60.!
+                </small>
+            </div>
+            <div class="form-group col-md-5 col-sm-5">
+                <label for="phonenumber">Phone Number:</label>
+                <input type="number"  placeholder="Phone Number" minlength="10" maxlength="10" id="phonenumber"
+                formControlName="phonenumber" class="form-control" [(ngModel)]="UserService.currentFitness.phonenumber"
+                 required ="required"
+                 >
+                 <small class="form-text text-muted"
+                    *ngIf="fitnessForm.controls.phonenumber.touched && fitnessForm.controls.phonenumber.errors?.required">
+                    Please enter phone number.!
+                </small>
+                <small class="form-text text-muted"
+                    *ngIf="fitnessForm.controls.phonenumber.touched && fitnessForm.controls.phonenumber.errors?.minlength">
+                    Invalid phone number.!
+                </small>
+                
+            </div>
+        </div>
+        <fieldset>
+            <legend>Address</legend>
+            <div class="row">
+                <div class="col-md-12 col-sm-8 form-group">
+                    <label for="streetaddress">Street Address:</label>
+                    <input type="text" placeholder="Street Adddress" id="streetaddress" formControlName="streetaddress" 
+                    class="form-control" [(ngModel)]="UserService.currentFitness.streetaddress"
+                    required="required"
+                    >
+                    <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.streetaddress.touched && fitnessForm.controls.streetaddress.errors?.required">
+                        Please enter street address.!
+                    </small>
+                </div>
+                <div class="col-md-4 col-sm-4 form-group">
+                    <label for="city">City:</label>
+                    <input type="text" placeholder="City" id="city" formControlName="city" class="form-control"                    
+                    [(ngModel)]="UserService.currentFitness.city" required="required"
+                     >
+                     <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.city.touched && fitnessForm.controls.city.errors?.required">
+                        Please enter city.!
+                    </small>
+                </div>
+                <div class="col-md-4 col-sm-4 form-group">
+                    <label for="state">State:</label>
+                    <input type="text" placeholder="State" id="state" formControlName="state" class="form-control" 
+                    [(ngModel)]="UserService.currentFitness.state"
+                    required="required"
+                    >
+                    <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.state.touched && fitnessForm.controls.state.errors?.required">
+                        Please enter State.!
+                    </small>
+                </div>
+                <div class="col-md-4 col-sm-4 form-group">
+                    <label for="country">Country:</label>
+                    <input type="text" placeholder="Country" id="country" formControlName="country" class="form-control" 
+                    [(ngModel)]="UserService.currentFitness.country"
+                    required="required"
+                    >
+                    <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.country.touched && fitnessForm.controls.country.errors?.required">
+                        Please enter Country.!
+                    </small>
+                </div>
+                <div class="col-md-3 col-sm-3 form-group">
+                    <label for="pincode">PinCode:</label>
+                    <input type="number" placeholder="PinCode" id="pincode" formControlName="pincode" class="form-control" 
+                    maxlength="6" minlength="6" [(ngModel)]="UserService.currentFitness.pincode"
+                    required="required"
+                    >
+                    <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.pincode.touched && fitnessForm.controls.pincode.errors?.required">
+                        Please enter Pincode.!
+                    </small>
+                    <small class="form-text text-muted"
+                        *ngIf="fitnessForm.controls.pincode.touched && fitnessForm.controls.pincode.errors?.minlength">
+                        Invalid PinCode.!
+                    </small>
+                </div>
+            </div><!--
+            <input type="number" placeholder="PinCode" id="pincode1" name="pincode1" class="form-control" ngModel #pincode1="ngModel"
+                    maxlength="6" minlength="6" (change)="log(pincode1)"><small class="form-text text-muted"
+                    *ngIf="pincode1.touched && pincode1.errors?.minlength">
+                    Invalid PinCode.!
+                </small>-->
+        </fieldset>
+        <legend>Trainer Preference:</legend>
+        <div class="trainerpreference" >
+        <input type="radio" id="male" formControlName="trainerpreference"  value="male" 
+        [(ngModel)]="UserService.currentFitness.trainerpreference" [checked]="true"
+        > Male Trainer<br>
+        <input type="radio" id="female" formControlName="trainerpreference" value="female" 
+        [(ngModel)]="UserService.currentFitness.trainerpreference"> Female Trainer<br>
+        <input type="radio" id="any" formControlName="trainerpreference" value="other" 
+        [(ngModel)]="UserService.currentFitness.trainerpreference"> Any<br><br></div>
+        
+        <label for="physiotherapist" >Do you need physiotherapist ?</label><br>
+        <input type="radio" id="yesphysio" formControlName="physiotherapist" value="yes"  [checked]="true"
+        [(ngModel)]="UserService.currentFitness.physiotherapist"> Yes
+        <input type="radio" id="nophysio" formControlName="physiotherapist" value="no"
+        [(ngModel)]="UserService.currentFitness.physiotherapist"> No<br><br>
+        <label for="appointment">Appointment   (free)</label>
+        <br>
+
+        <div style="overflow-x: auto;">
+        <table class="table table-hover table-striped">           
+        <tr>
+            <th>Day</th>
+            <th>7 to 9am</th>
+            <th>9 to 11am</th>
+            <th>11am to 1pm</th>
+            <th>1 to 3pm</th>
+            <th>3 to 5pm</th>
+        </tr>
+        <tr>
+            <th>Monday</th>
+            <td><input type="radio" id="M1" name="timeMon" value="M1" checked > 1 </td>
+            <td><input type="radio" id="M2" name="timeMon" value="M2" > 2 </td>
+            <td><input type="radio" id="M3" name="timeMon" value="M3" > 3 </td>
+            <td><input type="radio" id="M4" name="timeMon" value="M4" > 4 </td>
+            <td><input type="radio" id="M5" name="timeMon" value="M5" > 5 </td>
+        </tr>
+        <tr>
+            <th>Tuesday</th>
+            <td><input type="radio" id="T1" name="timeTue" value="T1"> 1 </td>
+            <td><input type="radio" id="T2" name="timeTue" value="T2"> 2 </td>
+            <td><input type="radio" id="T3" name="timeTue" value="T3" checked> 3 </td>
+            <td><input type="radio" id="T4" name="timeTue" value="T4"> 4 </td>
+            <td><input type="radio" id="T5" name="timeTue" value="T5"> 5 </td>
+        </tr>
+        <tr>
+            <th>Wednesday</th>
+            <td><input type="radio" id="W1" name="timeWed" value="W1"> 1 </td>
+            <td><input type="radio" id="W2" name="timeWed" value="W2"> 2 </td>
+            <td><input type="radio" id="W3" name="timeWed" value="W3" checked> 3 </td>
+            <td><input type="radio" id="W4" name="timeWed" value="W4"> 4 </td>
+            <td><input type="radio" id="W5" name="timeWed" value="W5"> 5 </td>
+        </tr>
+        <tr>
+            <th>Thursday</th>
+            <td><input type="radio" id="Th1" name="timeThur" value="Th1"> 1 </td>
+            <td><input type="radio" id="Th2" name="timeThur" value="Th2"> 2 </td>
+            <td><input type="radio" id="Th3" name="timeThur" value="Th3"> 3 </td>
+            <td><input type="radio" id="Th4" name="timeThur" value="Th4"> 4 </td>
+            <td><input type="radio" id="Th5" name="timeThur" value="Th5" checked> 5 </td>
+        </tr>
+        <tr>
+            <th>Friday</th>
+            <td><input type="radio" id="F1" name="timeFri" value="F1"> 1 </td>
+            <td><input type="radio" id="F2" name="timeFri" value="F2"> 2 </td>
+            <td><input type="radio" id="F3" name="timeFri" value="F3"> 3 </td>
+            <td><input type="radio" id="F4" name="timeFri" value="F4"> 4 </td>
+            <td><input type="radio" id="F5" name="timeFri" value="F5" > 5 </td>
+        </tr>
+        </table>
+    </div>
+        <legend>Select a Package:</legend>
+        <input type="radio" id="one" formControlName="packages" value="500" 
+        [(ngModel)]="UserService.currentFitness.packages"  > One time assessment only ( INR 500 )<br>
+        <input type="radio" id="two"  formControlName="packages" value="400" 
+        [(ngModel)]="UserService.currentFitness.packages"> Four Weekly Session ( INR 400/Session )<br>
+        <input type="radio" id="three" formControlName="packages" value="300" 
+        [(ngModel)]="UserService.currentFitness.packages"> 12 Weekly Session ( INR 300/Session )<br>
+        <input type="radio" id="four" formControlName="packages" value="100" 
+        [(ngModel)]="UserService.currentFitness.packages"> Other <br>
+        <br>
+        <div class="form-group row">
+            <legend>Your Quote:</legend>
+            <div class="col-xs-2">           
+                <input type="number"  placeholder="INR" id="inr" formControlName="inr" [(ngModel)]="UserService.currentFitness.inr"
+               class="form-control " value={{UserService.currentFitness.packages}}> 
+            </div>
+            <div class="col-xs-2"> 
+                <input type="number" placeholder="Paisa" id="paisa" [(ngModel)]="UserService.currentFitness.paisa"
+                formControlName="paisa" class="form-control " value="">
+            </div>
+        </div>
+       
+
+        <div class="row">
+            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-md-5 col-sm-6 col-7">
+                <button class="btn btn-success btn-block btn-lg my-2" >Place Appointment</button><!--(click)="onSubmit(UserService.currentFitness)"-->
+            </div>
+            <div class="col-md-3 col-sm-4 col-4">
+                <button type="reset" class="btn btn-primary btn-block btn-lg my-2" (click)="clear()">Clear</button>
+            </div>
+        </div>
+        
+    </form>
+</div>
